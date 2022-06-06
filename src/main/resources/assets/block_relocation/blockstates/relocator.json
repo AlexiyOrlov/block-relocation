@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "block_relocation:block/relocator"
+    }
+  }
+}

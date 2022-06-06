@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "block_relocation:block/relocator_end",
+    "east": "block_relocation:block/relocator_east",
+    "west": "block_relocation:block/relocator_west",
+    "north": "block_relocation:block/relocator_north",
+    "south": "block_relocation:block/relocator_south",
+    "up": "block_relocation:block/relocator_end",
+    "down": "block_relocation:block/relocator_end"
+  }
+}
