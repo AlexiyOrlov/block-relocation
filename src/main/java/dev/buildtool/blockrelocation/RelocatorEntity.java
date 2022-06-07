@@ -111,7 +111,7 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                                     if (!checkedPositions.contains(sideOfPlatform)) {
                                         checkedPositions.add(sideOfPlatform);
                                         entities.addAll(serverLevel.getEntitiesOfClass(Entity.class, new AABB(sideOfPlatform.above()), entity -> true));
-                                        blockSnapshots.add(BlockSnapshot.create(serverLevel.dimension(), level, sideOfPlatform));
+                                        blockSnapshots.add(BlockSnapshot.create(serverLevel.dimension(), serverLevel, sideOfPlatform));
                                     }
                                 }
                             }
