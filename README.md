@@ -1,7 +1,8 @@
 # Block Relocation
 
 Block Relocation is a mod which adds
-2 blocks: Platform and Relocator.
+2 blocks: Platform and Relocator. Both can be found in
+the Transportation creative tab.
 They can be used together to move other blocks
 in the world. Platform is responsible
 for grabbing adjacent blocks, while
@@ -11,6 +12,9 @@ redstone signal is received; it has a UI
 where you can set movement directions.
 Platform's sides can be toggled via an
 empty hand.
+
+Relocator recipe is a piston surrounded by obsidian, and
+Platform recipe is an iron ingot surrounded by sticks.
 
 Relocator's block entity implements *BlockMover*
 interface, and Platform's block entity
