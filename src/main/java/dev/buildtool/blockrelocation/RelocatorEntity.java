@@ -151,7 +151,7 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                     BlockRelocation.CHANNEL.send(PacketDistributor.DIMENSION.with(serverLevel::dimension), new UpdateBlock(forward, currentBlock, tag));
                     hashSet.forEach(blockLevelTicks::schedule);
                 });
-                entities.forEach(entity -> entity.setPosRaw(entity.getX() + moveTo.getStepX(), entity.getY() + moveTo.getStepY(), entity.getZ() + moveTo.getStepZ()));
+                entities.forEach(entity -> entity.moveTo(entity.getX() + moveTo.getStepX(), entity.getY() + moveTo.getStepY(), entity.getZ() + moveTo.getStepZ()));
             }
         }
 
