@@ -42,8 +42,8 @@ public class BlockRelocation {
 
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ID);
 
-    static final RegistryObject<Block> RELOCATOR = BLOCKS.register("relocator", () -> new RelocatorBlock(BlockBehaviour.Properties.of(Material.METAL)));
-    static final RegistryObject<Block> PLATFORM = BLOCKS.register("platform", () -> new PlatformBlock(BlockBehaviour.Properties.of(Material.METAL)));
+    static final RegistryObject<Block> RELOCATOR = BLOCKS.register("relocator", () -> new RelocatorBlock(BlockBehaviour.Properties.of(Material.METAL).strength(1.5f)));
+    static final RegistryObject<Block> PLATFORM = BLOCKS.register("platform", () -> new PlatformBlock(BlockBehaviour.Properties.of(Material.METAL).strength(1.0f)));
 
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ID);
 
