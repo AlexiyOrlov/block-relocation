@@ -34,8 +34,8 @@ displayName = "Block Relocation" #mandatory
 authors = "Alexiy" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description = '''
-Adds a Relocator and a Platform which can move blocks in tandem.
-Has a simple API for modders
+Adds a Relocator and a Platform which can move blocks in tandem; they can be found in Transportation creative tab.
+Has a simple API for modders; serves as a base for making submods.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.block_relocation]] #optional
