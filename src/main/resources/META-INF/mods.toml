@@ -23,7 +23,7 @@ version = "${file.jarVersion}" #mandatory
 # A display name for the mod
 displayName = "Block Relocation" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
-#updateJSONURL="http://myurl.me/" #optional
+updateJSONURL = "https://github.com/AlexiyOrlov/block-relocation/blob/master/changelog.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL = "https://github.com/AlexiyOrlov/block-relocation/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
