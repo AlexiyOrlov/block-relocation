@@ -28,11 +28,11 @@ public class RelocatorBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, InteractionHand p_60507_, BlockHitResult p_60508_) {
-        if (p_60504_.isClientSide) {
-            BlockEntity blockEntity = p_60504_.getBlockEntity(p_60505_);
+    public InteractionResult use(BlockState p_60503_, Level level, BlockPos pos, Player p_60506_, InteractionHand p_60507_, BlockHitResult p_60508_) {
+        if (level.isClientSide) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BlockMover)
-                openScreen((BlockMover) blockEntity, p_60505_);
+                openScreen((BlockMover) blockEntity, pos);
         }
         return InteractionResult.SUCCESS;
     }

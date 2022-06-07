@@ -12,16 +12,16 @@ import net.minecraft.world.level.block.Block;
 
 public class PlatformRenderer implements BlockEntityRenderer<PlatformEntity> {
     @Override
-    public void render(PlatformEntity platformEntity, float p_112308_, PoseStack p_112309_, MultiBufferSource multiBufferSource, int p_112311_, int p_112312_) {
+    public void render(PlatformEntity platformEntity, float p_112308_, PoseStack poseStack, MultiBufferSource multiBufferSource, int p_112311_, int p_112312_) {
         VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.lightning());
         IntegerColor closed = new IntegerColor(0x821E1Aff);
         IntegerColor open = new IntegerColor(0x416A37ff);
         platformEntity.openStates.forEach((direction, aBoolean) -> {
             if (Block.shouldRenderFace(platformEntity.getBlockState(), platformEntity.getLevel(), platformEntity.getBlockPos(), direction, platformEntity.getBlockPos().relative(direction))) {
                 if (aBoolean) {
-                    highlight(vertexConsumer, open.getRed(), open.getGreen(), open.getBlue(), open.getAlpha(), p_112309_, direction);
+                    highlight(vertexConsumer, open.getRed(), open.getGreen(), open.getBlue(), open.getAlpha(), poseStack, direction);
                 } else {
-                    highlight(vertexConsumer, closed.getRed(), closed.getGreen(), closed.getBlue(), closed.getAlpha(), p_112309_, direction);
+                    highlight(vertexConsumer, closed.getRed(), closed.getGreen(), closed.getBlue(), closed.getAlpha(), poseStack, direction);
                 }
             }
         });
