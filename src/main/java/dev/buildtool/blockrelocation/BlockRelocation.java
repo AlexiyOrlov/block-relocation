@@ -35,9 +35,7 @@ import java.util.HashMap;
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(BlockRelocation.ID)
 public class BlockRelocation {
-
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger("Block Relocation");
     public static final String ID = "block_relocation";
 
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ID);

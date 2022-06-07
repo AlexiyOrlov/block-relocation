@@ -152,6 +152,8 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                     hashSet.forEach(blockLevelTicks::schedule);
                 });
                 entities.forEach(entity -> entity.moveTo(entity.getX() + moveTo.getStepX(), entity.getY() + moveTo.getStepY(), entity.getZ() + moveTo.getStepZ()));
+            } else {
+                blockers.forEach((blockPos, blockState) -> BlockRelocation.LOGGER.warn("Relocator's movement is blocked by {} at {}", blockState.getBlock().getName().getString(), blockPos.toString().replace("BlockPos", "")));
             }
         }
 
