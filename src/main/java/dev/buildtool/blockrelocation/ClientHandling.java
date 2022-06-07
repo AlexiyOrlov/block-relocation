@@ -15,7 +15,7 @@ public class ClientHandling {
         return () -> () -> {
             Player player = Minecraft.getInstance().player;
             Level level = player.level;
-            BlockMover.setBlock(level, updateBlock.pos, updateBlock.blockState, 0, 512);
+            BlockMover.setBlockSilently(level, updateBlock.pos, updateBlock.blockState, 0, 512);
             if (updateBlock.entityData != null) {
                 BlockEntity blockEntity = level.getBlockEntity(updateBlock.pos);
                 blockEntity.load(updateBlock.entityData);

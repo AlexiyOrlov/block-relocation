@@ -70,7 +70,7 @@ public interface BlockMover {
     /**
      * Modified version of {@link Level#setBlock(BlockPos, BlockState, int, int)}
      */
-    static boolean setBlock(Level level, BlockPos at, BlockState blockState, int flags, int limit) {
+    static boolean setBlockSilently(Level level, BlockPos at, BlockState blockState, int flags, int limit) {
         if (level.isOutsideBuildHeight(at)) {
             return false;
         } else if (!level.isClientSide && level.isDebug()) {
@@ -89,7 +89,7 @@ public interface BlockMover {
             int oldLight = old.getLightEmission(level, at);
             int oldOpacity = old.getLightBlock(level, at);
 
-            BlockState blockstate = setBlockState(levelchunk, at, blockState);
+            BlockState blockstate = setBlockStateSilently(levelchunk, at, blockState);
             if (blockstate == null) {
                 if (blockSnapshot != null) level.capturedBlockSnapshots.remove(blockSnapshot);
                 return false;
@@ -110,7 +110,7 @@ public interface BlockMover {
      * Modified version of {@link LevelChunk#setBlockState(BlockPos, BlockState, boolean)}
      */
     @javax.annotation.Nullable
-    static BlockState setBlockState(LevelChunk chunk, BlockPos at, BlockState blockState) {
+    static BlockState setBlockStateSilently(LevelChunk chunk, BlockPos at, BlockState blockState) {
         int i = at.getY();
         LevelChunkSection levelchunksection = chunk.getSection(chunk.getSectionIndex(i));
         boolean flag = levelchunksection.hasOnlyAir();
