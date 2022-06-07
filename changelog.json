@@ -3,6 +3,8 @@
   "1.18.2": {
     "0.0.3": "Initial release"
   },
-  "1.18.2-latest": "0.0.3",
-  "1.18.2-recommended": "0.0.3"
+  "promos": {
+    "1.18.2-latest": "0.0.3",
+    "1.18.2-recommended": "0.0.3"
+  }
 }
