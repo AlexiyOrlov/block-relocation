@@ -23,6 +23,49 @@ import java.util.function.Predicate;
  * This interface represents block entity which performs relocation of blocks via {@link BlockGrabber} instances
  */
 public interface BlockMover {
+    /**
+     * Perform movement. Called in {@link RelocatorBlock#tick(BlockState, ServerLevel, BlockPos, Random)}
+     */
+    void move(ServerLevel serverLevel, Direction moveFrom);
+
+    /**
+     * @return what blockstates to grab
+     */
+    Predicate<BlockState> grabCondition();
+
+    /**
+     * Called in {@link RelocatorBlock#neighborChanged(BlockState, Level, BlockPos, Block, BlockPos, boolean)}
+     *
+     * @param direction block movement direction
+     */
+    void setFromDirection(Direction direction);
+
+    /**
+     * Called in {@link RelocatorScreen}
+     */
+    Direction getToFrom(Direction from);
+
+    /**
+     * Called in {@link RelocatorScreen#onClose()}
+     */
+    HashMap<Direction, Direction> getMovementDirections();
+
+    /**
+     * Called in {@link RelocatorScreen}
+     */
+    void setFromTo(Direction from, Direction to);
+
+    /**
+     * Called in {@link RelocatorBlock#tick(BlockState, ServerLevel, BlockPos, Random)}
+     *
+     * @return block movement direction
+     */
+    Direction getFromDirection();
+
+    /**
+     * Is set from {@link SetDirections packet}
+     */
+    void setMovementDirections(HashMap<Direction, Direction> movementDirections);
 
     /**
      * Modified version of {@link Level#setBlock(BlockPos, BlockState, int, int)}
@@ -116,48 +159,4 @@ public interface BlockMover {
             }
         }
     }
-
-    /**
-     * Perform movement. Called in {@link RelocatorBlock#tick(BlockState, ServerLevel, BlockPos, Random)}
-     */
-    void move(ServerLevel serverLevel, Direction moveFrom);
-
-    /**
-     * @return what blockstates to grab
-     */
-    Predicate<BlockState> grabCondition();
-
-    /**
-     * Called in {@link RelocatorBlock#neighborChanged(BlockState, Level, BlockPos, Block, BlockPos, boolean)}
-     *
-     * @param direction block movement direction
-     */
-    void setFromDirection(Direction direction);
-
-    /**
-     * Called in {@link RelocatorScreen}
-     */
-    Direction getToFrom(Direction from);
-
-    /**
-     * Called in {@link RelocatorScreen#onClose()}
-     */
-    HashMap<Direction, Direction> getMovementDirections();
-
-    /**
-     * Called in {@link RelocatorScreen}
-     */
-    void setFromTo(Direction from, Direction to);
-
-    /**
-     * Called in {@link RelocatorBlock#tick(BlockState, ServerLevel, BlockPos, Random)}
-     *
-     * @return block movement direction
-     */
-    Direction getFromDirection();
-
-    /**
-     * Is set from {@link SetDirections packet}
-     */
-    void setMovementDirections(HashMap<Direction, Direction> movementDirections);
 }
