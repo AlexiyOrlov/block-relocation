@@ -28,5 +28,7 @@ for reference.
 This mod depends on [Satako](https://github.com/AlexiyOrlov/satako) library.
 
 To prepare a workspace with this mod, add following dependencies to the build file (change the version appropriately):
+
 `runtimeOnly(fg.deobf('dev.buildtool:block-relocation:0.0.1-1.18.2'))`
+
 `implementation(fg.deobf('dev.buildtool:block-relocation:0.0.1-1.18.2:api'))`
