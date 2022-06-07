@@ -15,6 +15,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.Heightmap;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.function.Predicate;
@@ -109,7 +110,7 @@ public interface BlockMover {
     /**
      * Modified version of {@link LevelChunk#setBlockState(BlockPos, BlockState, boolean)}
      */
-    @javax.annotation.Nullable
+    @Nullable
     static BlockState setBlockStateSilently(LevelChunk chunk, BlockPos at, BlockState blockState) {
         int i = at.getY();
         LevelChunkSection levelchunksection = chunk.getSection(chunk.getSectionIndex(i));
