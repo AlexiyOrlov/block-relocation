@@ -14,9 +14,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -55,8 +58,12 @@ public class BlockRelocation {
     static final RegistryObject<BlockEntityType<PlatformEntity>> PLATFORM_ENTITY = BLOCK_ENTITIES.register("platform", () -> new BlockEntityType<>(PlatformEntity::new, Collections.singleton(PLATFORM.get()), null));
     static final String PROTOCOL = "1.0";
     static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation(ID, "network"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals);
-
+    public static ForgeConfigSpec.IntValue GRABBER_BATCH_LIMIT;
     public BlockRelocation() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, new ForgeConfigSpec.Builder().configure(builder -> {
+            GRABBER_BATCH_LIMIT = builder.defineInRange("Max number of connected platofrms", () -> 900, 2, 5712);
+            return builder.build();
+        }).getRight());
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(eventBus);
         ITEMS.register(eventBus);

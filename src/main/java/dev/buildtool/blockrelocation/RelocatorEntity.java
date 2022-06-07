@@ -69,7 +69,7 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
     public void move(ServerLevel serverLevel, Direction moveFrom) {
         LevelTicks<Block> blockLevelTicks = serverLevel.getBlockTicks();
         Direction moveTo = movementDirections.get(moveFrom);
-        HashSet<BlockPos> connectedPlatforms = BlockGrabber.getConnectedObjects(BlockGrabber.class, Direction.values(), getBlockPos(), serverLevel, new HashSet<>(2500), 2500);
+        HashSet<BlockPos> connectedPlatforms = BlockGrabber.getConnectedObjects(BlockGrabber.class, Direction.values(), getBlockPos(), serverLevel, new HashSet<>(BlockRelocation.GRABBER_BATCH_LIMIT.get()), BlockRelocation.GRABBER_BATCH_LIMIT.get());
         HashSet<BlockPos> grabbedPositions = new HashSet<>(connectedPlatforms.size());
         connectedPlatforms.forEach(blockPos -> {
             BlockEntity blockEntity2 = serverLevel.getBlockEntity(blockPos);
