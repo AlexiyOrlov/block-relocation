@@ -11,7 +11,8 @@ movement. Relocator works when a direct
 redstone signal is received; it has a UI
 where you can set movement directions.
 Platform's sides can be toggled via an
-empty hand.
+empty hand. Any entities above platforms
+will also be moved along.
 
 Relocator recipe is a piston surrounded by obsidian, and
 Platform recipe is an iron ingot surrounded by sticks.
