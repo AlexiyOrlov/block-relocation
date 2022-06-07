@@ -123,33 +123,35 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                 blockSnapshots.forEach(blockSnapshot -> {
                     BlockPos blockSnapshotPos = blockSnapshot.getPos();
                     serverLevel.removeBlockEntity(blockSnapshotPos);
-                    BlockMover.setBlockSilently(serverLevel, blockSnapshotPos, Blocks.AIR.defaultBlockState(), 2, 512);
-                    BlockRelocation.CHANNEL.send(PacketDistributor.DIMENSION.with(serverLevel::dimension), new UpdateBlock(blockSnapshotPos, Blocks.AIR.defaultBlockState(), null));
-                    LevelChunkTicks<Block> blockLevelChunkTicks = allContainers.get(ChunkPos.asLong(blockSnapshotPos));
-                    ScheduledTick<Block> peek = blockLevelChunkTicks.peek();
-                    if (peek != null)
-                        hashSet.add(new ScheduledTick<>(blockSnapshot.getReplacedBlock().getBlock(), blockSnapshotPos.relative(moveTo), peek.triggerTick(), peek.priority(), peek.subTickOrder()));
-                    blockLevelChunkTicks.removeIf(blockScheduledTick -> blockScheduledTick.pos().equals(blockSnapshotPos));
+                    if (BlockMover.setBlockSilently(serverLevel, blockSnapshotPos, Blocks.AIR.defaultBlockState(), 2, 512)) {
+                        BlockRelocation.CHANNEL.send(PacketDistributor.DIMENSION.with(serverLevel::dimension), new UpdateBlock(blockSnapshotPos, Blocks.AIR.defaultBlockState(), null));
+                        LevelChunkTicks<Block> blockLevelChunkTicks = allContainers.get(ChunkPos.asLong(blockSnapshotPos));
+                        ScheduledTick<Block> peek = blockLevelChunkTicks.peek();
+                        if (peek != null)
+                            hashSet.add(new ScheduledTick<>(blockSnapshot.getReplacedBlock().getBlock(), blockSnapshotPos.relative(moveTo), peek.triggerTick(), peek.priority(), peek.subTickOrder()));
+                        blockLevelChunkTicks.removeIf(blockScheduledTick -> blockScheduledTick.pos().equals(blockSnapshotPos));
+                    }
                 });
 
                 blockSnapshots.forEach(blockSnapshot -> {
                     BlockPos forward = blockSnapshot.getPos().relative(moveTo);
                     BlockState currentBlock = blockSnapshot.getReplacedBlock();
-                    BlockMover.setBlockSilently(serverLevel, forward, currentBlock, 2, 512);
-                    BlockEntity blockEntity2 = serverLevel.getBlockEntity(forward);
-                    CompoundTag tag = blockSnapshot.getTag();
-                    if (tag != null) {
-                        tag.putInt("x", forward.getX());
-                        tag.putInt("y", forward.getY());
-                        tag.putInt("z", forward.getZ());
-                    }
-                    if (blockEntity2 != null) {
+                    if (BlockMover.setBlockSilently(serverLevel, forward, currentBlock, 2, 512)) {
+                        BlockEntity blockEntity2 = serverLevel.getBlockEntity(forward);
+                        CompoundTag tag = blockSnapshot.getTag();
                         if (tag != null) {
-                            blockEntity2.load(tag);
+                            tag.putInt("x", forward.getX());
+                            tag.putInt("y", forward.getY());
+                            tag.putInt("z", forward.getZ());
                         }
+                        if (blockEntity2 != null) {
+                            if (tag != null) {
+                                blockEntity2.load(tag);
+                            }
+                        }
+                        BlockRelocation.CHANNEL.send(PacketDistributor.DIMENSION.with(serverLevel::dimension), new UpdateBlock(forward, currentBlock, tag));
+                        hashSet.forEach(blockLevelTicks::schedule);
                     }
-                    BlockRelocation.CHANNEL.send(PacketDistributor.DIMENSION.with(serverLevel::dimension), new UpdateBlock(forward, currentBlock, tag));
-                    hashSet.forEach(blockLevelTicks::schedule);
                 });
                 entities.forEach(entity -> entity.moveTo(entity.getX() + moveTo.getStepX(), entity.getY() + moveTo.getStepY(), entity.getZ() + moveTo.getStepZ()));
             } else {
