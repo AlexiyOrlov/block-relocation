@@ -59,7 +59,7 @@ public class BlockRelocation {
     public static ForgeConfigSpec.IntValue GRABBER_BATCH_LIMIT;
     public BlockRelocation() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, new ForgeConfigSpec.Builder().configure(builder -> {
-            GRABBER_BATCH_LIMIT = builder.defineInRange("Max number of connected platofrms", () -> 900, 2, 5712);
+            GRABBER_BATCH_LIMIT = builder.defineInRange("Max number of connected platforms", () -> 900, 2, 5712);
             return builder.build();
         }).getRight());
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
