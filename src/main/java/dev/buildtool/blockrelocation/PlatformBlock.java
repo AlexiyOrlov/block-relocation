@@ -19,14 +19,14 @@ public class PlatformBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState p_60503_, Level p_60504_, BlockPos pos, Player player, InteractionHand hand, BlockHitResult p_60508_) {
+    public InteractionResult use(BlockState p_60503_, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
         if (player.getItemInHand(hand).isEmpty()) {
-            PlatformEntity platformEntity = (PlatformEntity) p_60504_.getBlockEntity(pos);
-            Direction direction = p_60508_.getDirection();
+            PlatformEntity platformEntity = (PlatformEntity) level.getBlockEntity(pos);
+            Direction direction = blockHitResult.getDirection();
             platformEntity.openStates.put(direction, !platformEntity.openStates.get(direction));
             return InteractionResult.SUCCESS;
         }
-        return super.use(p_60503_, p_60504_, pos, player, hand, p_60508_);
+        return super.use(p_60503_, level, pos, player, hand, blockHitResult);
     }
 
     @Nullable
