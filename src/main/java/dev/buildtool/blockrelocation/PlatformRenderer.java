@@ -5,20 +5,18 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Matrix4f;
+import dev.buildtool.blockrelocation.api.BlockRenderHelper;
 import dev.buildtool.satako.IntegerColor;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 
-public class PlatformRenderer implements BlockEntityRenderer<PlatformEntity> {
-    private static final RenderType.CompositeState solidCompositeState = RenderType.CompositeState.builder().setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, true)).setShaderState(new RenderStateShard.ShaderStateShard(GameRenderer::getRendertypeLightningShader)).createCompositeState(false);
+public class PlatformRenderer implements BlockEntityRenderer<PlatformEntity>, BlockRenderHelper {
     @Override
     public void render(PlatformEntity platformEntity, float p_112308_, PoseStack poseStack, MultiBufferSource multiBufferSource, int p_112311_, int p_112312_) {
-        VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.create("lightning", DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, false, false, solidCompositeState));
+        VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.create("opaque", DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, false, false, opaqueCompositeState));
         IntegerColor closed = new IntegerColor(0x821E1Aff);
         IntegerColor open = new IntegerColor(0x416A37ff);
         platformEntity.openStates.forEach((direction, aBoolean) -> {
@@ -72,6 +70,5 @@ public class PlatformRenderer implements BlockEntityRenderer<PlatformEntity> {
                 vertexConsumer.vertex(matrix4f, 0.99f, 0, 0).color(red, green, blue, alpha).endVertex();
             }
         }
-
     }
 }
