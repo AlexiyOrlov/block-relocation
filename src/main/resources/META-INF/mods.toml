@@ -49,11 +49,9 @@ versionRange = "[40,)" #mandatory
 ordering = "NONE"
 # Side this dependency is applied on - BOTH, CLIENT or SERVER
 side = "BOTH"
-# Here's another dependency
 [[dependencies.block_relocation]]
 modId = "satako"
 mandatory = true
-# This version range declares a minimum of the current minecraft version up to but not including the next major version
 versionRange = "[5.0.3,)"
 ordering = "NONE"
 side = "BOTH"
