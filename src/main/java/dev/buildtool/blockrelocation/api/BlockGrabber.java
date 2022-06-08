@@ -2,10 +2,12 @@ package dev.buildtool.blockrelocation.api;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.apache.commons.lang3.ArrayUtils;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -17,6 +19,22 @@ public interface BlockGrabber {
      * @return true = open, false = closed
      */
     boolean isSideOpen(Direction side);
+
+    /**
+     * Save side states to the NBT
+     */
+    default void saveToTag(CompoundTag compoundTag, HashMap<Direction, Boolean> sideConfig) {
+        sideConfig.forEach((direction, aBoolean) -> compoundTag.putBoolean(direction.getName(), aBoolean));
+    }
+
+    /**
+     * Load side states from NBT
+     */
+    default void loadFromTag(CompoundTag compoundTag, HashMap<Direction, Boolean> sideMap) {
+        for (Direction direction : Direction.values()) {
+            sideMap.put(direction, compoundTag.getBoolean(direction.getName()));
+        }
+    }
 
     static HashSet<BlockPos> getConnectedObjects(Class<?> of, Direction[] checkedSides, BlockPos pos, Level world, HashSet<BlockPos> positions, int limit) {
         assert limit > 1 : "Limit must be >1";

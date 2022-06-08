@@ -28,15 +28,13 @@ public class PlatformEntity extends BlockEntity2 implements BlockGrabber {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        openStates.forEach((direction, aBoolean) -> tag.putBoolean(direction.getName(), aBoolean));
+        saveToTag(tag, openStates);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        for (Direction direction : Direction.values()) {
-            openStates.put(direction, tag.getBoolean(direction.getName()));
-        }
+        loadFromTag(tag, openStates);
     }
 
     @Override
