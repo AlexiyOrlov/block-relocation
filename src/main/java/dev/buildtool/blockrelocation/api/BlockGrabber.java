@@ -21,6 +21,16 @@ public interface BlockGrabber {
     boolean isSideOpen(Direction side);
 
     /**
+     * Toggles side state
+     *
+     * @param on      side clicked
+     * @param sideMap state map
+     */
+    default void toggleSide(Direction on, HashMap<Direction, Boolean> sideMap) {
+        sideMap.put(on, !sideMap.get(on));
+    }
+
+    /**
      * Save side states to the NBT
      */
     default void saveToTag(CompoundTag compoundTag, HashMap<Direction, Boolean> sideConfig) {

@@ -23,7 +23,7 @@ public class PlatformBlock extends Block implements EntityBlock {
         if (player.getItemInHand(hand).isEmpty()) {
             PlatformEntity platformEntity = (PlatformEntity) level.getBlockEntity(pos);
             Direction direction = blockHitResult.getDirection();
-            platformEntity.openStates.put(direction, !platformEntity.openStates.get(direction));
+            platformEntity.toggleSide(direction, platformEntity.openStates);
             return InteractionResult.SUCCESS;
         }
         return super.use(p_60503_, level, pos, player, hand, blockHitResult);
