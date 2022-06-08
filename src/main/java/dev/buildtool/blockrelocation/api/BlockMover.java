@@ -32,7 +32,9 @@ public interface BlockMover {
     /**
      * @return what blockstates to grab
      */
-    Predicate<BlockState> grabCondition();
+    default Predicate<BlockState> grabCondition() {
+        return blockState -> !blockState.isAir() && blockState.getDestroySpeed(null, null) != -1 && !blockState.getMaterial().isLiquid();
+    }
 
     /**
      * Called in {@link RelocatorBlock#neighborChanged(BlockState, Level, BlockPos, Block, BlockPos, boolean)}
