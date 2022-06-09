@@ -1,3 +1,4 @@
 0.0.4-1.18.2:
 fixed typo in configuration file;
-fixed platform side transparency
+fixed platform side transparency;
+fixed a bug related to neighboring block notification;
