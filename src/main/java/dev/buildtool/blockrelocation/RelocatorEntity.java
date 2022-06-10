@@ -4,12 +4,15 @@ import dev.buildtool.blockrelocation.api.BlockGrabber;
 import dev.buildtool.blockrelocation.api.BlockMover;
 import dev.buildtool.satako.BlockEntity2;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -157,7 +160,7 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                 });
                 entities.forEach(entity -> entity.moveTo(entity.getX() + moveTo.getStepX(), entity.getY() + moveTo.getStepY(), entity.getZ() + moveTo.getStepZ()));
             } else {
-                blockers.forEach((blockPos, blockState) -> BlockRelocation.LOGGER.warn("Relocator's movement is blocked by {} at {}", blockState.getBlock().getName().getString(), blockPos.toString().replace("BlockPos", "")));
+                level.getEntitiesOfClass(Player.class, new AABB(getBlockPos()).inflate(16), player -> !player.isSpectator()).forEach(player -> blockers.forEach((blockPos, blockState) -> player.sendMessage(new TranslatableComponent("block_relocation.movement.blocked", blockState.getBlock().getName().getString(), blockPos.toString().replace("BlockPos", "")), Util.NIL_UUID)));
             }
         }
 

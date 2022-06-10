@@ -2,5 +2,6 @@
   "itemGroup.block_relocation.blocks": "Block Relocation",
   "block.block_relocation.platform": "Platform",
   "block.block_relocation.relocator": "Relocator",
-  "block_relocation.movement.directions": "Movement directions"
+  "block_relocation.movement.directions": "Movement directions",
+  "block_relocation.movement.blocked": "Movement blocked by %s at %s"
 }
