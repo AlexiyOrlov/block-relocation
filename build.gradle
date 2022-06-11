@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 
 group = 'dev.buildtool'
-version = '0.0.6-1.18.2'
+version = '0.0.8-1.18.2'
 
 java {
     archivesBaseName = 'block-relocation'

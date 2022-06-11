@@ -1,4 +1,6 @@
-added a chat message for players when the relocator's movement is blocked
+added a chat message for players when the relocator's movement is blocked;
+bottom of the platform is open by default;
+increased blocks' explosion resistance
 
 0.0.5-1.18.2:
 fixed typo in configuration file;
