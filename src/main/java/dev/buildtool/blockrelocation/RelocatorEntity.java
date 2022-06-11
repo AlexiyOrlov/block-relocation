@@ -160,7 +160,7 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                 });
                 entities.forEach(entity -> entity.moveTo(entity.getX() + moveTo.getStepX(), entity.getY() + moveTo.getStepY(), entity.getZ() + moveTo.getStepZ()));
             } else {
-                level.getEntitiesOfClass(Player.class, new AABB(getBlockPos()).inflate(16), player -> !player.isSpectator()).forEach(player -> blockers.forEach((blockPos, blockState) -> player.sendMessage(new TranslatableComponent("block_relocation.movement.blocked", blockState.getBlock().getName().getString(), blockPos.toString().replace("BlockPos", "")), Util.NIL_UUID)));
+                level.getEntitiesOfClass(Player.class, new AABB(getBlockPos()).inflate(8), player -> !player.isSpectator()).forEach(player -> blockers.forEach((blockPos, blockState) -> player.sendMessage(new TranslatableComponent("block_relocation.movement.blocked", blockState.getBlock().getName().getString(), blockPos.toString().replace("BlockPos", "")), Util.NIL_UUID)));
             }
         }
 
