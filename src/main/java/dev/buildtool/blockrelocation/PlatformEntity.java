@@ -22,7 +22,7 @@ public class PlatformEntity extends BlockEntity2 implements BlockGrabber {
         openStates.put(Direction.WEST, true);
         openStates.put(Direction.SOUTH, true);
         openStates.put(Direction.NORTH, true);
-        openStates.put(Direction.DOWN, false);
+        openStates.put(Direction.DOWN, true);
     }
 
     @Override

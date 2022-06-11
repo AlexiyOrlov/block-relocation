@@ -1,3 +1,5 @@
+added a chat message for players when the relocator's movement is blocked
+
 0.0.5-1.18.2:
 fixed typo in configuration file;
 fixed platform side transparency;
