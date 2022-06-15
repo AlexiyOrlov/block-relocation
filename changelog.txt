@@ -1,4 +1,5 @@
-made it so redstone wire connects to the reloactor
+made it so redstone wire connects to the relocator;
+made it so relocator doesn't transmit redstone signal
 
 0.0.9-1.18.2:
 added a chat message for players when the relocator's movement is blocked;

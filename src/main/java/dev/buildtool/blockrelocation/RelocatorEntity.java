@@ -131,10 +131,12 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                     if (BlockMover.setBlockSilently(serverLevel, blockSnapshotPos, Blocks.AIR.defaultBlockState(), 2, 512)) {
                         BlockRelocation.CHANNEL.send(PacketDistributor.DIMENSION.with(serverLevel::dimension), new UpdateBlock(blockSnapshotPos, Blocks.AIR.defaultBlockState(), null));
                         LevelChunkTicks<Block> blockLevelChunkTicks = allContainers.get(ChunkPos.asLong(blockSnapshotPos));
-                        ScheduledTick<Block> peek = blockLevelChunkTicks.peek();
-                        if (peek != null)
-                            hashSet.add(new ScheduledTick<>(blockSnapshot.getReplacedBlock().getBlock(), blockSnapshotPos.relative(moveTo), peek.triggerTick(), peek.priority(), peek.subTickOrder()));
-                        blockLevelChunkTicks.removeIf(blockScheduledTick -> blockScheduledTick.pos().equals(blockSnapshotPos));
+                        if (blockLevelChunkTicks.hasScheduledTick(blockSnapshotPos, blockSnapshot.getReplacedBlock().getBlock())) {
+                            ScheduledTick<Block> peek = blockLevelChunkTicks.peek();
+                            if (peek != null)
+                                hashSet.add(new ScheduledTick<>(blockSnapshot.getReplacedBlock().getBlock(), blockSnapshotPos.relative(moveTo), peek.triggerTick(), peek.priority(), peek.subTickOrder()));
+                            blockLevelChunkTicks.removeIf(blockScheduledTick -> blockScheduledTick.pos().equals(blockSnapshotPos));
+                        }
                     }
                 });
 
