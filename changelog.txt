@@ -1,3 +1,5 @@
+made it so redstone wire connects to the reloactor
+
 0.0.9-1.18.2:
 added a chat message for players when the relocator's movement is blocked;
 bottom of the platform is open by default;
