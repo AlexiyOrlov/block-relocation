@@ -1,3 +1,4 @@
+0.0.12-1.18.2:
 made it so redstone wire connects to the relocator;
 made it so relocator doesn't transmit redstone signal;
 fixed bug with incorrect block tick transition;
