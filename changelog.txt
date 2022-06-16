@@ -1,6 +1,7 @@
 made it so redstone wire connects to the relocator;
 made it so relocator doesn't transmit redstone signal;
 fixed bug with incorrect block tick transition;
+made it so if the player is sneaking while placing a platform, its back side will be closed;
 
 0.0.9-1.18.2:
 added a chat message for players when the relocator's movement is blocked;

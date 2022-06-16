@@ -43,7 +43,6 @@ public class PlatformBlock extends Block implements EntityBlock {
             PlatformEntity platformEntity = (PlatformEntity) level.getBlockEntity(pos);
             if (livingEntity.getXRot() > 45) {
                 platformEntity.toggleSide(Direction.DOWN, platformEntity.openStates);
-
             } else if (livingEntity.getXRot() < -45) {
                 platformEntity.toggleSide(Direction.UP, platformEntity.openStates);
             } else {
