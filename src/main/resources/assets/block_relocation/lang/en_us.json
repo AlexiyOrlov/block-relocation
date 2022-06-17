@@ -4,5 +4,6 @@
   "block.block_relocation.relocator": "Relocator",
   "block_relocation.movement.directions": "Movement directions",
   "block_relocation.movement.blocked": "Movement blocked by %s at %s",
-  "block_relocation.relocator": "Relocator"
+  "block_relocation.relocator": "Relocator",
+  "block.relocation.command": "Notification toggled"
 }
