@@ -129,7 +129,7 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                     if (!serverLevel.isOutsideBuildHeight(blockSnapshotPos)) {
                         serverLevel.getChunkAt(blockSnapshotPos).removeBlockEntity(blockSnapshotPos);
                     }
-                    if (BlockMover.setBlockSilently(serverLevel, blockSnapshotPos, Blocks.AIR.defaultBlockState(), 3, 512)) {
+                    if (BlockMover.setBlockSilently(serverLevel, blockSnapshotPos, Blocks.AIR.defaultBlockState(), 2, 512)) {
                         BlockRelocation.CHANNEL.send(PacketDistributor.DIMENSION.with(serverLevel::dimension), new UpdateBlock(blockSnapshotPos, Blocks.AIR.defaultBlockState(), null));
                         LevelChunkTicks<Block> blockLevelChunkTicks = allContainers.get(ChunkPos.asLong(blockSnapshotPos));
                         if (blockLevelChunkTicks.hasScheduledTick(blockSnapshotPos, blockSnapshot.getReplacedBlock().getBlock())) {
@@ -144,7 +144,7 @@ public class RelocatorEntity extends BlockEntity2 implements BlockMover {
                 blockSnapshots.forEach(blockSnapshot -> {
                     BlockPos forward = blockSnapshot.getPos().relative(moveTo);
                     BlockState currentBlock = blockSnapshot.getReplacedBlock();
-                    if (BlockMover.setBlockSilently(serverLevel, forward, currentBlock, 3, 512)) {
+                    if (BlockMover.setBlockSilently(serverLevel, forward, currentBlock, 2, 512)) {
                         BlockEntity blockEntity2 = serverLevel.getBlockEntity(forward);
                         CompoundTag tag = blockSnapshot.getTag();
                         if (tag != null) {
