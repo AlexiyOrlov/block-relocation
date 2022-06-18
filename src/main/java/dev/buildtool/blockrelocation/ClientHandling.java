@@ -20,6 +20,7 @@ public class ClientHandling {
                 BlockEntity blockEntity = level.getBlockEntity(updateBlock.pos);
                 blockEntity.load(updateBlock.entityData);
             }
+            level.sendBlockUpdated(updateBlock.pos, updateBlock.blockState, updateBlock.blockState, 2);
             contextSupplier.get().setPacketHandled(true);
         };
     }
