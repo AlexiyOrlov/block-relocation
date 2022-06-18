@@ -1,3 +1,6 @@
+added a command "block_relocation toggleNotification", which toggles notification about movement blockers;
+fixed ghost blocks being left by Relocator;
+
 0.0.12-1.18.2:
 made it so redstone wire connects to the relocator;
 made it so relocator doesn't transmit redstone signal;
